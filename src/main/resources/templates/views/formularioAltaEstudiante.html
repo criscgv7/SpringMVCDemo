@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,23 @@
     <title>Document</title>
 
 </head>
+
 <body>
     <h1>Formulario de Alta de Estudiante</h1>
-        <!-- ¿Como funciona un formulario en html en general? -->
+    <!-- ¿Como funciona un formulario en html en general? -->
 
-        <form th:object="${estudiante}">
-            <label for="nombre"> Nombre</label>
-<input type="text" name="nombre" id="nombre"  th:field="*{nombre}">
+    <form th:object="${estudiante}">
+        <label for="nombre"> Nombre:</label>
+        <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
 
+        <label for="primerApellido"> Primer Apellido: </label>
+        <input type="text" name="segundoApellido" id="primerApellido" th:field="*{segundoApellido}">
 
+        <label for="segundoApellido"> Segundo Apellido: </label>
+        <input type="text" name="segundoApellido" id="segundoApellido" th:field="*{segundoApellido}">
 
-        </form>
-<!-- <form action="#" method="get">
+    </form>
+    <!-- <form action="#" method="get">
 
 
     <input name="nombre" placeholder="Escriba su nombre, porfa!!" type="text">
@@ -30,4 +36,5 @@
 </form> -->
 
 </body>
+
 </html>
