@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -15,14 +15,45 @@
 
     <form th:object="${estudiante}">
         <label for="nombre"> Nombre:</label>
-        <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
+        <input type="text" name="nombre" id="nombre" th:field="*{nombre}" required>
 
         <label for="primerApellido"> Primer Apellido: </label>
-        <input type="text" name="segundoApellido" id="primerApellido" th:field="*{segundoApellido}">
+        <input type="text" name="segundoApellido" id="primerApellido" th:field="*{segundoApellido}" required>
 
         <label for="segundoApellido"> Segundo Apellido: </label>
-        <input type="text" name="segundoApellido" id="segundoApellido" th:field="*{segundoApellido}">
+        <input type="text" name="segundoApellido" id="segundoApellido" th:field="*{segundoApellido}" required>
 
+        <label for="fechaAlta">Fecha de Alta</label>
+        <input type="date" name="fechaALta" id="fechaAlta" th:field="*{fechaAlta}" required>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+        <input type="date" name="fechaNacimiento" id="fechaNacimiento" th:field="*{fechaNacimiento}" >
+
+       <fieldset>
+        <legend>Género</legend>
+        <label for="hombre">Hombre</label>
+        <input type="radio" name="genero" id="hombre" value="HOMBRE" th:field="*{genero}" required>
+
+        <label for="mujer">Mujer</label>
+        <input type="radio" name="genero" id="mujer" value="MUJER" th:field="*{genero}" required>
+
+        <label for="otro">Otro</label>
+        <input type="radio" name="genero" id="otro" value="OTRO" th:field="*{genero}" required>
+       </fieldset>
+
+       <label for="beca"> Beca</label>
+       <input type="text" name="beca" id="beca" th:field="*{beca}">
+ 
+      
+        <label for="idFacultad">Facultad:</label>
+        <select name="idFacultad" id="idFacultad" required>
+        <option></option>
+        <option value="1">Informática</option>
+        <option value="2">Biología</option>
+        <option value="3">Letras</option>
+       </select>
+       <input type="submit" value="Alta">
+       
     </form>
     <!-- <form action="#" method="get">
 
