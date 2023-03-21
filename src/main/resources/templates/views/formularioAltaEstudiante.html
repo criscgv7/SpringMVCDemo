@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -27,33 +27,39 @@
         <input type="date" name="fechaALta" id="fechaAlta" th:field="*{fechaAlta}" required>
 
         <label for="fechaNacimiento">Fecha de Nacimiento</label>
-        <input type="date" name="fechaNacimiento" id="fechaNacimiento" th:field="*{fechaNacimiento}" >
+        <input type="date" name="fechaNacimiento" id="fechaNacimiento" th:field="*{fechaNacimiento}">
 
-       <fieldset>
-        <legend>Género</legend>
-        <label for="hombre">Hombre</label>
-        <input type="radio" name="genero" id="hombre" value="HOMBRE" th:field="*{genero}" required>
+        <fieldset>
+            <legend>Género</legend>
+            <label for="hombre">Hombre</label>
+            <input type="radio" name="genero" id="hombre" value="HOMBRE" th:field="*{genero}" required>
 
-        <label for="mujer">Mujer</label>
-        <input type="radio" name="genero" id="mujer" value="MUJER" th:field="*{genero}" required>
+            <label for="mujer">Mujer</label>
+            <input type="radio" name="genero" id="mujer" value="MUJER" th:field="*{genero}" required>
 
-        <label for="otro">Otro</label>
-        <input type="radio" name="genero" id="otro" value="OTRO" th:field="*{genero}" required>
-       </fieldset>
+            <label for="otro">Otro</label>
+            <input type="radio" name="genero" id="otro" value="OTRO" th:field="*{genero}" required>
+        </fieldset>
 
-       <label for="beca"> Beca</label>
-       <input type="text" name="beca" id="beca" th:field="*{beca}">
- 
-      
+        <label for="beca"> Beca</label>
+        <input type="text" name="beca" id="beca" th:field="*{beca}">
+
+
         <label for="idFacultad">Facultad:</label>
         <select name="idFacultad" id="idFacultad" required>
-        <option></option>
-        <option value="1">Informática</option>
-        <option value="2">Biología</option>
-        <option value="3">Letras</option>
-       </select>
-       <input type="submit" value="Alta">
-       
+
+            <option></option> 
+            <option th:each="facultad : ${facultades}"  th:value="${facultad.id}" th:text="${facultad.nombre}"></option>
+          
+            
+            
+            <!--
+            <option value="1">Informática</option>
+            <option value="2">Biología</option>
+            <option value="3">Letras</option> -->
+        </select>
+        <input type="submit" value="Alta">
+
     </form>
     <!-- <form action="#" method="get">
 

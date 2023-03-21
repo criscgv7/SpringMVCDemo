@@ -37,6 +37,7 @@ public class SpringMvcDemoApplication implements CommandLineRunner {
 
 		facultadService.save(Facultad.builder().nombre("Informatica").build());
 		facultadService.save(Facultad.builder().nombre("Biologia").build());
+		facultadService.save(Facultad.builder().nombre("Letras").build());
 		estudianteService.save(Estudiante.builder().id(1).nombre("Mara").primerApellido("García")
 				.segundoApellido("López").fechaAlta(LocalDate.of(2018, Month.APRIL, 20))
 				.fechaNacimiento(LocalDate.of(1993, Month.APRIL, 20)).genero(Genero.MUJER).beca(6500.00)
