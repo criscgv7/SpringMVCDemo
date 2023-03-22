@@ -46,18 +46,19 @@
 
 
         <label for="idFacultad">Facultad:</label>
-        <select name="idFacultad" id="idFacultad" required>
+        <select name="facultad" id="idFacultad" required>
 
-            <option></option> 
-            <option th:each="facultad : ${facultades}"  th:value="${facultad.id}" th:text="${facultad.nombre}"></option>
-         
+            <option></option>
+            <option th:each="facultad : ${facultades}" th:value="${facultad.id}" th:text="${facultad.nombre}"></option>
+
             <!--
             <option value="1">Informática</option>
             <option value="2">Biología</option>
             <option value="3">Letras</option> -->
         </select>
         <label>Telefono(s): </label>
-        <input type="text" name="numerosTelefonos" id=""numerosTelefonos" placeholder="Uno o varios separados por punto y coma">
+        <input type="text" name="numerosTelefonos" id="numerosTelefonos"
+            placeholder="Uno o varios separados por punto y coma">
 
         <input type="submit" value="Alta">
 

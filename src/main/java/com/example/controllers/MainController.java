@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.entities.Estudiante;
 import com.example.entities.Facultad;
+import com.example.entities.Telefono;
 import com.example.services.EstudianteService;
 import com.example.services.FacultadService;
+import com.example.services.TelefonoService;
 
 @Controller
 @RequestMapping("/") // El controlador en el patron MVC de Spring responde a una request concreta
@@ -31,6 +34,8 @@ public class MainController {
     private EstudianteService estudianteService;
     @Autowired
     private FacultadService facultadService;
+    @Autowired
+    private TelefonoService telefonoService;
 
     /**
      * El metodo siguiente devuelve un listado de estudiantes
@@ -62,8 +67,23 @@ public class MainController {
     public String altaEstudiante(@ModelAttribute Estudiante estudiante,
             @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
         LOG.info("Telefonos recibidos:" + telefonosRecibidos);
-        String
+        List<String> listadoNumerosTelefonos = null;
+        if (telefonosRecibidos != null) {
+            String[] arrayTelefonos = telefonosRecibidos.split(";");
+            List<String> listadonumerosTelefono = Arrays.asList(arrayTelefonos);
+        }
+
         estudianteService.save(estudiante);
+
+        if (listadoNumerosTelefonos != null) {
+            listadoNumerosTelefonos.stream().forEach(n -> {
+                Telefono telefonoObject = Telefono.builder().telefono(n).build();
+                
+                telefonoService.save(telefonoObject); 
+          
+           
+            });
+        }
 
         return "redirect:/listar";
     }
