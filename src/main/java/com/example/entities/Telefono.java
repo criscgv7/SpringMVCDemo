@@ -2,7 +2,6 @@ package com.example.entities;
 
 import java.io.Serializable;
 
-import com.example.entities.Facultad.FacultadBuilder;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

@@ -88,4 +88,10 @@ public class MainController {
         return "redirect:/listar";
     }
 
+
+    /*Actualiza un estudiante */
+@GetMapping("/actualizar/{id}")
+    public String actualizaEstudiante(int idEstudiante) {
+        return "redirect:/listar"; 
+    }
 }
