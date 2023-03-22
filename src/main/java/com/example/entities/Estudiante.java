@@ -19,6 +19,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class Estudiante implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull(message = "El nombre no puede ser null")
-   // @Size (max=25, min=4)//
+  //@Size (max=25, min=4)//
     private String nombre; 
     private String primerApellido;
     private String segundoApellido;
@@ -53,7 +54,7 @@ public class Estudiante implements Serializable {
     @ManyToOne (fetch = FetchType.EAGER, cascade =  CascadeType.PERSIST)
 
     private Facultad facultad; 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "estudiante")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "estudiante")
     private List <Telefono> telefonos; 
 
 
