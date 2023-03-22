@@ -39,7 +39,7 @@
                 <td th:text="${estudiante.beca}"></td>
                 <td th:text="${estudiante.facultad.nombre}"></td>
 
-                <td><a th:href="@{/actualizar/}+${estudiante.id}">Actualizar</a>
+                <td><a th:href="@{/frmActualizar/}+${estudiante.id}">Actualizar</a>
                     <a th:href="@{/borrar/}+${estudiante.id}">Borrar</a>
                     <a th:href="@{/detalles/}+${estudiante.id}">Ver detalles</a>
                 </td>

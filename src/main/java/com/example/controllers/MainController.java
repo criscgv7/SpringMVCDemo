@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,9 +90,9 @@ public class MainController {
     }
 
 
-    /*Actualiza un estudiante */
-@GetMapping("/actualizar/{id}")
-    public String actualizaEstudiante(int idEstudiante) {
+    /** FOrmulario para actualizar  un estudiante */
+@GetMapping("/frmActualizar/{id}")
+    public String actualizaEstudiante(@PathVariable(name = "id") int idEstudiante) {
         return "redirect:/listar"; 
     }
 }
