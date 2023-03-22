@@ -3,6 +3,7 @@ package com.example.controllers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,16 +57,17 @@ public class MainController {
     public String formularioAltaEstudiante(Model model) {
 
         List<Facultad> facultades = facultadService.findAll();
+        Estudiante estudiante = new Estudiante(); 
 
-        model.addAttribute("estudiante", new Estudiante());
+        model.addAttribute("estudiante", estudiante);
         model.addAttribute("facultades", facultades);
 
         return "views/formularioAltaEstudiante";
 
     }
 
-    @PostMapping("/altaEstudiante")
-    public String altaEstudiante(@ModelAttribute Estudiante estudiante,
+    @PostMapping("/altaModificacionEstudiante")
+    public String altaModificacionEstudiante(@ModelAttribute Estudiante estudiante,
             @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
         LOG.info("Telefonos recibidos:" + telefonosRecibidos);
         List<String> listadoNumerosTelefonos = null;
@@ -79,20 +81,34 @@ public class MainController {
         if (listadoNumerosTelefonos != null) {
             listadoNumerosTelefonos.stream().forEach(n -> {
                 Telefono telefonoObject = Telefono.builder().telefono(n).build();
-                
-                telefonoService.save(telefonoObject); 
-          
-           
+
+                telefonoService.save(telefonoObject);
+
             });
         }
 
         return "redirect:/listar";
     }
 
+    /** FOrmulario para actualizar un estudiante */
+    @GetMapping("/frmActualizar/{id}")
+    public String frmActualizarEstudiante(@PathVariable(name = "id") int idEstudiante, Model model) {
+        Estudiante estudiante = estudianteService.findById(idEstudiante);
+        List<Telefono> todosTelefonos = telefonoService.findAll();
+        List<Telefono> telefonosDelEstudiante = todosTelefonos.stream()
+                .filter(telefono -> telefono.getEstudiante().getId() == idEstudiante).collect(Collectors.toList());
+                List <Facultad> facultades = facultadService.findAll();
+                String numerosDeTelefono = telefonosDelEstudiante.stream().map(telefono -> telefono.getTelefono()).collect(Collectors.joining(";")); 
 
-    /** FOrmulario para actualizar  un estudiante */
-@GetMapping("/frmActualizar/{id}")
-    public String actualizaEstudiante(@PathVariable(name = "id") int idEstudiante) {
-        return "redirect:/listar"; 
+
+                model.addAttribute("estudiante", estudiante); 
+                model.addAttribute("telefonos", numerosDeTelefono); 
+                model.addAttribute("facultades", facultades);
+
+                
+                
+
+
+        return "views/formularioAltaEstudiante";
     }
 }
