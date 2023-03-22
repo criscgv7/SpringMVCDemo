@@ -70,6 +70,11 @@ public class MainController {
     public String altaModificacionEstudiante(@ModelAttribute Estudiante estudiante,
             @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
         LOG.info("Telefonos recibidos:" + telefonosRecibidos);
+
+        if(estudiante.getId() !=0) {
+
+            estudianteService.deleteById(estudiante.getId());
+        }
         List<String> listadoNumerosTelefonos = null;
         if (telefonosRecibidos != null) {
             String[] arrayTelefonos = telefonosRecibidos.split(";");
@@ -77,10 +82,10 @@ public class MainController {
         }
 
         estudianteService.save(estudiante);
-
+//Borrar todos los telefonos que tenga el estudiante si hay que insertar nuevos
         if (listadoNumerosTelefonos != null) {
             listadoNumerosTelefonos.stream().forEach(n -> {
-                Telefono telefonoObject = Telefono.builder().telefono(n).build();
+                Telefono telefonoObject = Telefono.builder().telefono(n).estudiante(estudiante).build();
 
                 telefonoService.save(telefonoObject);
 
