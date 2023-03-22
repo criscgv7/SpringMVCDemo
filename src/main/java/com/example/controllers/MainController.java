@@ -18,7 +18,6 @@ import com.example.entities.Facultad;
 import com.example.services.EstudianteService;
 import com.example.services.FacultadService;
 
-
 @Controller
 @RequestMapping("/") // El controlador en el patron MVC de Spring responde a una request concreta
 // y la delega posteriormente en un metodo que tiene en cuenta el metodo
@@ -27,7 +26,7 @@ import com.example.services.FacultadService;
 // protocolo http: put, delete, option, get, post...
 public class MainController {
 
-    private static final Logger LOG= Logger.getLogger("MainController"); 
+    private static final Logger LOG = Logger.getLogger("MainController");
     @Autowired
     private EstudianteService estudianteService;
     @Autowired
@@ -60,9 +59,11 @@ public class MainController {
     }
 
     @PostMapping("/altaEstudiante")
-    public String altaEstudiante(@ModelAttribute Estudiante estudiante, @RequestParam(name="numerosTelefonos") String telefonosRecibidos) {
+    public String altaEstudiante(@ModelAttribute Estudiante estudiante,
+            @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
         LOG.info("Telefonos recibidos:" + telefonosRecibidos);
-estudianteService.save(estudiante); 
+        String
+        estudianteService.save(estudiante);
 
         return "redirect:/listar";
     }
