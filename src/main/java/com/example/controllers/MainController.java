@@ -3,6 +3,7 @@ package com.example.controllers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,22 +114,38 @@ public class MainController {
         List<Telefono> todosTelefonos = telefonoService.findAll();
         List<Telefono> telefonosDelEstudiante = todosTelefonos.stream()
                 .filter(telefono -> telefono.getEstudiante().getId() == idEstudiante).collect(Collectors.toList());
-                List <Facultad> facultades = facultadService.findAll();
-                String numerosDeTelefono = telefonosDelEstudiante.stream().map(telefono -> telefono.getTelefono()).collect(Collectors.joining(";")); 
+        List<Facultad> facultades = facultadService.findAll();
+        String numerosDeTelefono = telefonosDelEstudiante.stream().map(telefono -> telefono.getTelefono())
+                .collect(Collectors.joining(";"));
 
+        model.addAttribute("estudiante", estudiante);
+        model.addAttribute("telefonos", numerosDeTelefono);
+        model.addAttribute("facultades", facultades);
 
-                model.addAttribute("estudiante", estudiante); 
-                model.addAttribute("telefonos", numerosDeTelefono); 
-                model.addAttribute("facultades", facultades);
-
-                return "views/formularioAltaEstudiante";
+        return "views/formularioAltaEstudiante";
     }
 
+    @GetMapping("/borrar/{id}")
+    public String borrarEstudiante(@PathVariable(name = "id") int idEstudiante) {
+        estudianteService.delete(estudianteService.findById(idEstudiante));
 
-         @GetMapping("/borrar/{id}")
-                public String borrarEstudiante ( @PathVariable(name="id") int idEstudiante){
-                   estudianteService.delete(estudianteService.findById(idEstudiante));
-          
-          return "redirect:/listar"; 
+        return "redirect:/listar";
     }
+
+    @GetMapping("/detalles/{id}")
+    public ModelAndView detalles(@PathVariable(name = "id") int id) {
+
+        Estudiante estudiante = estudianteService.findById(id);
+        List<Telefono> telefonosEstudiante = telefonoService.findByEstudiante(estudiante);
+        List<String> numerosEstudiante = telefonosEstudiante.stream()
+                .map(t -> t.getTelefono())
+                .toList();
+        ModelAndView mav = new ModelAndView("views/detailsEstudiante");
+
+        mav.addObject("telefonos", numerosEstudiante);
+        mav.addObject("estudiante", estudiante);
+
+        return mav;
+    }
+
 }

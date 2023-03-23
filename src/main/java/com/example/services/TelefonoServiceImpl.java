@@ -38,8 +38,14 @@ private TelefonoDao telefonoDao;
     @Override
     @Transactional
     public void deleteByEstudiante(Estudiante estudiante) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteByEstudiante'");
+        telefonoDao.deleteByEstudiante(estudiante); 
+    }
+
+    @Override
+   
+    public List <Telefono> findByEstudiante(Estudiante estudiante) {
+     return telefonoDao.findByEstudiante (estudiante);
+    
     }
     
 }
