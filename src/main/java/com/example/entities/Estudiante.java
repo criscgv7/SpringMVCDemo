@@ -19,7 +19,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,10 +50,10 @@ public class Estudiante implements Serializable {
     private double beca; 
  
 
-    @ManyToOne (fetch = FetchType.EAGER, cascade =  CascadeType.PERSIST)
+    @ManyToOne (fetch = FetchType.LAZY, cascade =  CascadeType.PERSIST)
 
     private Facultad facultad; 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "estudiante")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "estudiante")
     private List <Telefono> telefonos; 
 
 

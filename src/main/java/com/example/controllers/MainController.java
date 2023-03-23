@@ -57,7 +57,7 @@ public class MainController {
     public String formularioAltaEstudiante(Model model) {
 
         List<Facultad> facultades = facultadService.findAll();
-        Estudiante estudiante = new Estudiante(); 
+        Estudiante estudiante = new Estudiante();
 
         model.addAttribute("estudiante", estudiante);
         model.addAttribute("facultades", facultades);
@@ -71,18 +71,29 @@ public class MainController {
             @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
         LOG.info("Telefonos recibidos:" + telefonosRecibidos);
 
-        if(estudiante.getId() !=0) {
+        estudianteService.save(estudiante);
 
-            estudianteService.deleteById(estudiante.getId());
-        }
+        /**
+         * if(estudiante.getId() !=0) {
+         * 
+         * estudianteService.deleteById(estudiante.getId());
+         * }
+         * List<String> listadoNumerosTelefonos = null;
+         * if (telefonosRecibidos != null) {
+         * String[] arrayTelefonos = telefonosRecibidos.split(";");
+         * List<String> listadonumerosTelefono = Arrays.asList(arrayTelefonos);
+         * }
+         **/
+        estudianteService.save(estudiante);
         List<String> listadoNumerosTelefonos = null;
+
         if (telefonosRecibidos != null) {
             String[] arrayTelefonos = telefonosRecibidos.split(";");
-            List<String> listadonumerosTelefono = Arrays.asList(arrayTelefonos);
+            listadoNumerosTelefonos = Arrays.asList(arrayTelefonos);
         }
 
-        estudianteService.save(estudiante);
-//Borrar todos los telefonos que tenga el estudiante si hay que insertar nuevos
+        // Borrar todos los telefonos que tenga el estudiante si hay que insertar nuevos
+
         if (listadoNumerosTelefonos != null) {
             listadoNumerosTelefonos.stream().forEach(n -> {
                 Telefono telefonoObject = Telefono.builder().telefono(n).estudiante(estudiante).build();
@@ -110,10 +121,14 @@ public class MainController {
                 model.addAttribute("telefonos", numerosDeTelefono); 
                 model.addAttribute("facultades", facultades);
 
-                
-                
+                return "views/formularioAltaEstudiante";
+    }
 
 
-        return "views/formularioAltaEstudiante";
+         @GetMapping("/borrar/{id}")
+                public String borrarEstudiante ( @PathVariable(name="id") int idEstudiante){
+                   estudianteService.delete(estudianteService.findById(idEstudiante));
+          
+          return "redirect:/listar"; 
     }
 }

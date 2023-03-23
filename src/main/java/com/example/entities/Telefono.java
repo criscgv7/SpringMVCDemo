@@ -2,7 +2,6 @@ package com.example.entities;
 
 import java.io.Serializable;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,7 +32,7 @@ public class Telefono implements Serializable {
     private String telefono;
     private int idEstudiante;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private Estudiante estudiante;
 
  

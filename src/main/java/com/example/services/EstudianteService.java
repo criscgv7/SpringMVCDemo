@@ -14,5 +14,7 @@ public interface EstudianteService {
 
     public void deleteById(int idEstudiante);
 
+    public void delete (Estudiante estudiante); 
+
 }
 /* No es necesario un método update porque va solo al guardar. */
